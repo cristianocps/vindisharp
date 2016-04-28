@@ -1,0 +1,144 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{324FA828-2C3F-4F10-A6EE-72E104A8DD4A}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>VindiSharp.Core</RootNamespace>
+    <AssemblyName>VindiSharp.Core</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'DebugNET451|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\DebugNET451\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=8.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>packages\Newtonsoft.Json.8.0.3\lib\net40\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="RestSharp, Version=105.2.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\RestSharp.105.2.3\lib\net4\RestSharp.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Core\QueryParameter.cs" />
+    <Compile Include="Core\VindiNodeAttribute.cs" />
+    <Compile Include="Entities\Bill\Bill.cs" />
+    <Compile Include="Entities\Bill\BillItem.cs" />
+    <Compile Include="Entities\Bill\BillSummary.cs" />
+    <Compile Include="Entities\Bill\PaymentProfile.cs" />
+    <Compile Include="Entities\Charge\Charge.cs" />
+    <Compile Include="Entities\Charge\ChargeSummary.cs" />
+    <Compile Include="Entities\Customer\Customer.cs" />
+    <Compile Include="Entities\Customer\CustomerAddress.cs" />
+    <Compile Include="Entities\Customer\CustomerPhone.cs" />
+    <Compile Include="Entities\Customer\CustomerSummary.cs" />
+    <Compile Include="Entities\Discount\Discount.cs" />
+    <Compile Include="Entities\Discount\DiscountProduct.cs" />
+    <Compile Include="Entities\Discount\DiscountProductItem.cs" />
+    <Compile Include="Entities\Discount\DiscountSummary.cs" />
+    <Compile Include="Entities\Issues\Issue.cs" />
+    <Compile Include="Enums\IssueType.cs" />
+    <Compile Include="Entities\Payment\PaymentCompany.cs" />
+    <Compile Include="Entities\Payment\PaymentMethod.cs" />
+    <Compile Include="Entities\Period\PeriodSummary.cs" />
+    <Compile Include="Entities\Plan\Plan.cs" />
+    <Compile Include="Entities\Plan\PlanSummary.cs" />
+    <Compile Include="Entities\Plan\ProductItem.cs" />
+    <Compile Include="Entities\Product\PricingRanx.cs" />
+    <Compile Include="Entities\Product\PricingSchema.cs" />
+    <Compile Include="Entities\Product\Product.cs" />
+    <Compile Include="Entities\Product\ProductSummary.cs" />
+    <Compile Include="Entities\Subscription\CurrentPeriod.cs" />
+    <Compile Include="Entities\Subscription\Subscription.cs" />
+    <Compile Include="Entities\Subscription\SubscriptionSummary.cs" />
+    <Compile Include="Entities\Transaction\Transaction.cs" />
+    <Compile Include="Entities\Transaction\TransactionSummary.cs" />
+    <Compile Include="Enums\BillingTriggerType.cs" />
+    <Compile Include="Enums\ChargeStatus.cs" />
+    <Compile Include="Enums\CustomerStatus.cs" />
+    <Compile Include="Enums\DiscountStatus.cs" />
+    <Compile Include="Enums\DiscountType.cs" />
+    <Compile Include="Enums\IssueStatus.cs" />
+    <Compile Include="Enums\PhoneType.cs" />
+    <Compile Include="Enums\PlanInterval.cs" />
+    <Compile Include="Enums\PricingSchemaType.cs" />
+    <Compile Include="Enums\SortOrder.cs" />
+    <Compile Include="Enums\SubscriptionOnSuccessType.cs" />
+    <Compile Include="Enums\TransactionStatus.cs" />
+    <Compile Include="Enums\TransactionType.cs" />
+    <Compile Include="Enums\VindiRequestMethod.cs" />
+    <Compile Include="Extensions\AttributeExtensions.cs" />
+    <Compile Include="Interfaces\Client\IVindiContext.cs" />
+    <Compile Include="Interfaces\Client\IVindiHttpClient.cs" />
+    <Compile Include="Interfaces\IVindiEntity.cs" />
+    <Compile Include="Interfaces\Services\IPeriodService.cs" />
+    <Compile Include="Interfaces\Services\IIssueService.cs" />
+    <Compile Include="Interfaces\Services\ITransactionService.cs" />
+    <Compile Include="Interfaces\Services\IProductItemsService.cs" />
+    <Compile Include="Interfaces\Services\ISubscriptionService.cs" />
+    <Compile Include="Interfaces\Services\IProductService.cs" />
+    <Compile Include="Interfaces\Services\IPaymentService.cs" />
+    <Compile Include="Interfaces\Services\IDiscountService.cs" />
+    <Compile Include="Interfaces\Services\IChargeService.cs" />
+    <Compile Include="Interfaces\Services\IBillService.cs" />
+    <Compile Include="Interfaces\Services\ICustomerService.cs" />
+    <Compile Include="Interfaces\Common\IDeleteService.cs" />
+    <Compile Include="Interfaces\Common\IInsertService.cs" />
+    <Compile Include="Interfaces\Common\ISearchService.cs" />
+    <Compile Include="Interfaces\Common\IUpdateService.cs" />
+    <Compile Include="Interfaces\Services\IPlanService.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
