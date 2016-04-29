@@ -8,10 +8,11 @@ namespace VindiSharp.Core.Interfaces
 {
     public interface ISubscriptionService :
         IDeleteService<Subscription>,
-        IInsertService<Subscription>,
+
         ISearchService<Subscription>
 
     {
         Subscription Reactivate(long Id);
+        SubscriptionResponse Create(SubscriptionRequest newSubscription);
     }
 }

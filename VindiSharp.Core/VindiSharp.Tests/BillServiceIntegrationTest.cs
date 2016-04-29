@@ -32,5 +32,10 @@ namespace VindiSharp.Tests
 
             Assert.True(bills != null && bills.Count > 0);
         }
+        [Test]
+        public void TestCreateBill()
+        {
+
+        }
     }
 }

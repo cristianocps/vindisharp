@@ -63,6 +63,9 @@ namespace VindiSharp.Core.Entities
         [JsonProperty("plan")]
         public PlanSummary Plan { get; set; }
 
+        [JsonProperty("bill")]
+        public Bill Bill { get; set; }
+
         [JsonProperty("product_items")]
         public List<ProductItem> ProductItems { get; set; }
 
@@ -82,6 +85,16 @@ namespace VindiSharp.Core.Entities
             {
                 return RESOURCE_NAME;
             }
+        }
+
+        public Subscription CreateNew(long planId, long customerId, string paymentMethod, List<long> products)
+        {
+            Subscription subscription = new Subscription
+            {
+
+            };
+
+            return subscription;
         }
     }
 }

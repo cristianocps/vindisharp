@@ -18,9 +18,9 @@ namespace VindiSharp.Client.Services
             genericRepository = repository;
         }
 
-        public Subscription Create(Subscription Entity)
+        public SubscriptionResponse Create(SubscriptionRequest Entity)
         {
-            return genericRepository.Insert<Subscription>(Subscription.RESOURCE_NAME, Entity);
+            return genericRepository.Client.Do<SubscriptionRequest, SubscriptionResponse>(Subscription.RESOURCE_NAME, String.Empty, VindiRequestMethod.Post, Entity);
         }
 
         public Subscription Delete(long Id)

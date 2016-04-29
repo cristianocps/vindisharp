@@ -39,5 +39,18 @@ namespace VindiSharp.Tests
 
             Assert.IsNotNull(subscription);
         }
+        [Test]
+        public void TestCreateSubscription()
+        {
+            SubscriptionResponse newSubscription = subscriptionService.Create(new SubscriptionRequest
+            {
+                CustomerId = 604792,
+                PlanId = 9488,
+                PaymentMethodCode = "credit_card",
+                BillingCycles = 1,
+                BillingTriggerType = Core.Enums.BillingTriggerType.BeginningOfPeriod,
+                ProductItems = new List<SubscriptionRequestProductItem> { new SubscriptionRequestProductItem { ProductId = 18125, Cycles = 1 } }
+            });
+        }
     }
 }
