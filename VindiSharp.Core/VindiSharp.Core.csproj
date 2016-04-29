@@ -60,6 +60,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Converters\NumberBoolConverter.cs" />
     <Compile Include="Core\QueryParameter.cs" />
     <Compile Include="Core\VindiNodeAttribute.cs" />
     <Compile Include="Entities\Bill\Bill.cs" />
@@ -77,6 +78,10 @@
     <Compile Include="Entities\Discount\DiscountProductItem.cs" />
     <Compile Include="Entities\Discount\DiscountSummary.cs" />
     <Compile Include="Entities\Issues\Issue.cs" />
+    <Compile Include="Entities\Plan\PlanItem.cs" />
+    <Compile Include="Enums\SubscriptionStatus.cs" />
+    <Compile Include="Enums\PlanStatus.cs" />
+    <Compile Include="Enums\ProductStatus.cs" />
     <Compile Include="Enums\IssueType.cs" />
     <Compile Include="Entities\Payment\PaymentCompany.cs" />
     <Compile Include="Entities\Payment\PaymentMethod.cs" />
@@ -107,9 +112,16 @@
     <Compile Include="Enums\TransactionStatus.cs" />
     <Compile Include="Enums\TransactionType.cs" />
     <Compile Include="Enums\VindiRequestMethod.cs" />
+    <Compile Include="Exceptions\VindiError.cs" />
+    <Compile Include="Exceptions\VindiInvalidParametersException.cs" />
+    <Compile Include="Exceptions\VindiRequestInvalidSyntaxException.cs" />
+    <Compile Include="Exceptions\VindiNotFoundException.cs" />
+    <Compile Include="Exceptions\VindiServerErrorException.cs" />
     <Compile Include="Extensions\AttributeExtensions.cs" />
+    <Compile Include="Extensions\DestroyableExtensions.cs" />
     <Compile Include="Interfaces\Client\IVindiContext.cs" />
     <Compile Include="Interfaces\Client\IVindiHttpClient.cs" />
+    <Compile Include="Interfaces\IDestroyableEntity.cs" />
     <Compile Include="Interfaces\IVindiEntity.cs" />
     <Compile Include="Interfaces\Services\IPeriodService.cs" />
     <Compile Include="Interfaces\Services\IIssueService.cs" />

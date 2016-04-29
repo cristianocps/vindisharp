@@ -1,4 +1,6 @@
-﻿using RestSharp;
+﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using RestSharp;
 using RestSharp.Authenticators;
 using RestSharp.Newtonsoft.Json;
 using System;
@@ -8,8 +10,9 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using VindiSharp.Core.Enums;
+using VindiSharp.Core.Exceptions;
 using VindiSharp.Core.Interfaces;
-using RestSharpJsonRequest = RestSharp.Newtonsoft.Json.RestRequest;
+using RestRequest = RestSharp.RestRequest;
 namespace VindiSharp.Client
 {
     public class VindiHttpClient : IVindiHttpClient
@@ -83,25 +86,33 @@ namespace VindiSharp.Client
         public TResponse Do<TResponse>(string Resource, string NodeName, VindiRequestMethod RequestMethod = VindiRequestMethod.Get, Dictionary<string, object> Parameters = null)
             where TResponse : class, new()
         {
-            RestSharpJsonRequest request = new RestSharpJsonRequest(Resource, GetMethod(RequestMethod));
+            RestRequest request = new RestRequest(Resource, GetMethod(RequestMethod));
             request.RequestFormat = DataFormat.Json;
             request.RootElement = NodeName;
-            request.JsonSerializer = new NewtonsoftJsonSerializer();
+            SetSerializer(request);
 
             AddParameters(Parameters, request);
 
             IRestResponse<TResponse> response = restClient.Execute<TResponse>(request);
 
-            HandleResponse(response);
+            HandleResponse(response, request);
 
             return response.Data;
         }
 
+        private static void SetSerializer(IRestRequest request)
+        {
+            request.JsonSerializer = new NewtonsoftJsonSerializer(new JsonSerializer { NullValueHandling = NullValueHandling.Ignore });
+        }
+
         private static void AddParameters(Dictionary<string, object> Parameters, IRestRequest request)
         {
-            foreach (KeyValuePair<string, object> parameter in Parameters)
+            if (Parameters != null)
             {
-                request.AddParameter(parameter.Key, parameter.Value);
+                foreach (KeyValuePair<string, object> parameter in Parameters)
+                {
+                    request.AddParameter(parameter.Key, parameter.Value);
+                }
             }
         }
 
@@ -110,7 +121,8 @@ namespace VindiSharp.Client
             where TResponse : class, new()
             where TEntity : class, IVindiEntity, new()
         {
-            RestSharpJsonRequest request = new RestSharpJsonRequest(Resource, GetMethod(RequestMethod));
+            RestRequest request = new RestRequest(Resource, GetMethod(RequestMethod));
+            SetSerializer(request);
 
             request.RequestFormat = DataFormat.Json;
             request.RootElement = NodeName;
@@ -119,28 +131,31 @@ namespace VindiSharp.Client
 
             IRestResponse<TResponse> response = restClient.Execute<TResponse>(request);
 
-            HandleResponse(response);
+            HandleResponse(response, request);
+
             return response.Data;
         }
         public void Do<TEntity>(string Resource, VindiRequestMethod RequestMethod, TEntity Parameters)
            where TEntity : class, IVindiEntity, new()
         {
-            RestSharpJsonRequest request = new RestSharpJsonRequest(Resource, GetMethod(RequestMethod));
-
+            RestRequest request = new RestRequest(Resource, GetMethod(RequestMethod));
+            SetSerializer(request);
             request.RequestFormat = DataFormat.Json;
 
             request.AddJsonBody(Parameters);
 
             IRestResponse response = restClient.Execute(request);
 
-            HandleResponse(response);
+            HandleResponse(response, request);
 
         }
 
         public async Task<TResponse> DoAsync<TResponse>(string Resource, string NodeName, VindiRequestMethod RequestMethod = VindiRequestMethod.Get, Dictionary<string, object> Parameters = null)
         where TResponse : class, new()
         {
-            IRestRequest request = new RestSharpJsonRequest(Resource, GetMethod(RequestMethod));
+            IRestRequest request = new RestRequest(Resource, GetMethod(RequestMethod));
+            SetSerializer(request);
+
             request.RequestFormat = DataFormat.Json;
 
             request.RootElement = NodeName;
@@ -151,7 +166,7 @@ namespace VindiSharp.Client
 
             IRestResponse<TResponse> response = await restClient.ExecuteTaskAsync<TResponse>(request, cancellationTokenSource.Token);
 
-            HandleResponse(response);
+            HandleResponse(response, request);
 
             return response.Data;
         }
@@ -160,7 +175,9 @@ namespace VindiSharp.Client
 
              where TEntity : class, IVindiEntity, new()
         {
-            IRestRequest request = new RestSharpJsonRequest(Resource, GetMethod(RequestMethod));
+            IRestRequest request = new RestRequest(Resource, GetMethod(RequestMethod));
+            SetSerializer(request);
+
             request.RequestFormat = DataFormat.Json;
 
             request.AddJsonBody(Parameter);
@@ -169,14 +186,16 @@ namespace VindiSharp.Client
 
             IRestResponse response = await restClient.ExecuteTaskAsync(request, cancellationTokenSource.Token);
 
-            HandleResponse(response);
+            HandleResponse(response, request);
         }
 
         public async Task<TResponse> DoAsync<TEntity, TResponse>(string Resource, string NodeName, VindiRequestMethod RequestMethod, TEntity Parameter)
             where TResponse : class, new()
             where TEntity : class, IVindiEntity, new()
         {
-            IRestRequest request = new RestSharpJsonRequest(Resource, GetMethod(RequestMethod));
+            IRestRequest request = new RestRequest(Resource, GetMethod(RequestMethod));
+            SetSerializer(request);
+
             request.RequestFormat = DataFormat.Json;
 
             request.RootElement = NodeName;
@@ -187,22 +206,42 @@ namespace VindiSharp.Client
 
             IRestResponse<TResponse> response = await restClient.ExecuteTaskAsync<TResponse>(request, cancellationTokenSource.Token);
 
-            HandleResponse(response);
+            HandleResponse(response, request);
 
             return response.Data;
         }
-        private void HandleResponse(IRestResponse response)
+        private void HandleResponse(IRestResponse response, IRestRequest request)
         {
             Int32 httpStatusCode = (int)response.StatusCode;
 
 
             if (httpStatusCode >= 400 && httpStatusCode < 500)
             {
+                if (httpStatusCode == 404)
+                {
+                    JObject jsonObject = JObject.Parse(response.Content);
+                    List<VindiError> errors = jsonObject.SelectToken("errors", false).ToObject<List<VindiError>>();
 
+                    throw new VindiNotFoundException(errors, "O objeto requisitado não foi encontrado no Vindi, verifique a propriedade Errors da Exceção para mais detalhes");
+                }
+                else if (httpStatusCode == 400)
+                {
+                    Parameter param = request.Parameters.FirstOrDefault(p => p.Type == ParameterType.RequestBody);
+
+                    throw new VindiRequestInvalidSyntaxException(param != null ? param.Value.ToString() : string.Empty, "Um ou mais erros de sintaxe foram encontrados no corpo da requisição");
+                }
+                else if (httpStatusCode == 422)
+                {
+                    JObject jsonObject = JObject.Parse(response.Content);
+                    List<VindiError> errors = jsonObject.SelectToken("errors", false).ToObject<List<VindiError>>();
+
+                    throw new VindiInvalidParametersException(errors, "A requisição foi enviada com um ou mais parâmetros inválidos, verifique a propriedade Errors para mais detalhes");
+
+                }
             }
             else if (httpStatusCode >= 500)
             {
-
+                throw new VindiServerErrorException("A API do Vindi retornou erro 500, tente conectar novamente em alguns instantes.");
             }
         }
     }

@@ -12,6 +12,6 @@ namespace VindiSharp.Core.Interfaces
         ISearchService<Subscription>
 
     {
-        void Reactivate(long Id);
+        Subscription Reactivate(long Id);
     }
 }

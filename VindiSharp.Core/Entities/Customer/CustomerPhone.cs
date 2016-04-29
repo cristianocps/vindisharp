@@ -5,10 +5,11 @@ using System.Text;
 using VindiSharp.Core.Enums;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
+using VindiSharp.Core.Interfaces;
 
 namespace VindiSharp.Core.Entities
 {
-    public class CustomerPhone
+    public class CustomerPhone : IDestroyableEntity
     {
         [JsonProperty("id", NullValueHandling = NullValueHandling.Ignore)]
         public Int64? Id
@@ -16,14 +17,15 @@ namespace VindiSharp.Core.Entities
             get;
             set;
         }
-        [JsonProperty("phone_type")]
-        [JsonConverter(typeof(StringEnumConverter), new object[] { true })]
-        public PhoneType PhoneType
+
+        [JsonProperty("phone_type", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonConverter(typeof(StringEnumConverter))]
+        public PhoneType? PhoneType
         {
             get;
             set;
         }
-        [JsonProperty("number")]
+        [JsonProperty("number", NullValueHandling = NullValueHandling.Ignore)]
         public String Number
         {
             get;
@@ -36,5 +38,11 @@ namespace VindiSharp.Core.Entities
             set;
         }
 
+        public bool? Destroy
+        {
+            get;
+            set;
+
+        }
     }
 }

@@ -50,7 +50,7 @@ namespace VindiSharp.Core.Entities
             set;
         }
         [JsonProperty("status")]
-        [JsonConverter(typeof(StringEnumConverter), new object[] { true })]
+        [JsonConverter(typeof(StringEnumConverter))]
         public CustomerStatus Status
         {
             get;
@@ -87,6 +87,7 @@ namespace VindiSharp.Core.Entities
             set;
         }
         public const string RESOURCE_NAME = "customers";
+
         public string ResourceName
         {
             get

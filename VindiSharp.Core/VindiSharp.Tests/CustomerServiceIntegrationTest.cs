@@ -8,7 +8,7 @@ using VindiSharp.Client;
 using VindiSharp.Client.Services;
 using VindiSharp.Core.Entities;
 using VindiSharp.Core.Interfaces;
-
+using VindiSharp.Core.Extensions;
 namespace VindiSharp.Tests
 {
     [TestFixture, Category("Integration")]
@@ -21,7 +21,7 @@ namespace VindiSharp.Tests
         {
 
 
-            IVindiHttpClient client = new VindiHttpClient(new Uri("https://app.vindi.com.br/api/"), "lfuHcxrBPMfeB4uwU-VoSAvOUCsJqbSS", "v1");
+            IVindiHttpClient client = new VindiHttpClient(new Uri("https://app.vindi.com.br/api/"), "RO7GCigchzNXcPJlIz4De_lO70lBmWV8", "v1");
             IVindiGenericRepository repository = new VindiGenericRepository(client);
 
             customerService = new CustomerService(repository);
@@ -37,15 +37,12 @@ namespace VindiSharp.Tests
         [Test]
         public void TestCreateCustomer()
         {
-            Customer newCustomer = new Customer
-            {
-                Name = "Renan 1Sight",
-                Email = "contato@1sight.com.br",
-                Status = Core.Enums.CustomerStatus.Active,
-                Phones = new List<CustomerPhone> { new CustomerPhone { Number = "19996519722", PhoneType = Core.Enums.PhoneType.Mobile }, new CustomerPhone { Number = "551935045412", PhoneType = Core.Enums.PhoneType.Landline } }
-            };
+            Customer newCustomer = customerService.GetById(604792);
 
-            Customer vindiCustomer = customerService.Create(newCustomer);
+            
+            newCustomer.Phones.Add(new CustomerPhone { Number = "5519996589496", PhoneType = Core.Enums.PhoneType.Mobile });
+
+            Customer updatedCustomer = customerService.Update(newCustomer);
         }
     }
 }

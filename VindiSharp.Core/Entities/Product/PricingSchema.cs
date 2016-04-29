@@ -24,14 +24,14 @@ namespace VindiSharp.Core.Entities
         }
 
         [JsonProperty("price")]
-        public int Price
+        public decimal Price
         {
             get;
             set;
         }
 
         [JsonProperty("minimum_price")]
-        public int MinimumPrice
+        public decimal MinimumPrice
         {
             get;
             set;

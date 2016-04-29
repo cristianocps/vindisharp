@@ -17,7 +17,10 @@ namespace VindiSharp.Core
 
             if (memInfo != null && memInfo.Length > 0)
             {
-                object[] attrs = memInfo[0].GetCustomAttributes(typeof(TAttribute),
+
+                MemberInfo member = memInfo.Length > 1 ? memInfo.Single(item => item.DeclaringType == e.GetType()) : memInfo[0];
+
+                object[] attrs = member.GetCustomAttributes(typeof(TAttribute),
                                                             false);
                 if (attrs != null && attrs.Length > 0)
                     return attrs.Select(item => item as TAttribute);

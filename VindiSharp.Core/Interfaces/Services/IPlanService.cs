@@ -7,12 +7,11 @@ using VindiSharp.Core.Entities;
 namespace VindiSharp.Core.Interfaces
 {
     public interface IPlanService :
-         IDeleteService<Plan>,
          IInsertService<Plan>,
          IUpdateService<Plan>,
          ISearchService<Plan>
 
     {
-
+        Plan GetByCode(String code);
     }
 }

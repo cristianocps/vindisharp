@@ -38,9 +38,9 @@ namespace VindiSharp.Client.Services
             return genericRepository.GetById<Customer>(Customer.RESOURCE_NAME, Id);
         }
 
-        public void Update(Customer Entity)
+        public Customer Update(Customer Entity)
         {
-            genericRepository.Update(Customer.RESOURCE_NAME, Entity.Id, Entity);
+            return genericRepository.Update(Customer.RESOURCE_NAME, Entity.Id, Entity);
         }
     }
 }

@@ -1,21 +1,25 @@
 ﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using VindiSharp.Core.Enums;
+using VindiSharp.Core.Interfaces;
 
 namespace VindiSharp.Core.Entities
 {
 
-    public class Subscription
+    [VindiNode(MultiResultsNodeName = "subscriptions", SingleResultNodeName = "subscription")]
+    public class Subscription : IVindiEntity
     {
 
         [JsonProperty("id")]
         public int Id { get; set; }
 
         [JsonProperty("status")]
-        public string Status { get; set; }
+        [JsonConverter(typeof(StringEnumConverter), new object[] { true })]
+        public SubscriptionStatus Status { get; set; }
 
         [JsonProperty("start_at")]
         public DateTimeOffset StartAt { get; set; }
@@ -27,7 +31,7 @@ namespace VindiSharp.Core.Entities
         public string Code { get; set; }
 
         [JsonProperty("cancel_at")]
-        public DateTimeOffset CancelAt { get; set; }
+        public DateTimeOffset? CancelAt { get; set; }
 
         [JsonProperty("interval")]
         public string Interval { get; set; }
@@ -70,5 +74,14 @@ namespace VindiSharp.Core.Entities
 
         [JsonProperty("metadata")]
         public Dictionary<string, string> Metadata { get; set; }
+
+        public const string RESOURCE_NAME = "subscriptions";
+        public string ResourceName
+        {
+            get
+            {
+                return RESOURCE_NAME;
+            }
+        }
     }
 }

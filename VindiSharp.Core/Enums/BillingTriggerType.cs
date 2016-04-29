@@ -7,8 +7,8 @@ namespace VindiSharp.Core.Enums
 {
     public enum BillingTriggerType
     {
-        BeginningOfPeriod,
-        EndOfPeriod,
-        DayOfMonth
+        Beginning_Of_Period,
+        End_Of_Period,
+        Day_Of_Month
     }
 }

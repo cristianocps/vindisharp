@@ -14,6 +14,14 @@ namespace VindiSharp.Client
     {
         IVindiHttpClient vindiClient;
 
+        public IVindiHttpClient Client
+        {
+            get
+            {
+                return vindiClient;
+            }
+        }
+
         public VindiGenericRepository(IVindiHttpClient vindiClient)
         {
             this.vindiClient = vindiClient;
@@ -27,7 +35,7 @@ namespace VindiSharp.Client
             parameters["per_page"] = PerPage;
 
             if (Parameters != null && Parameters.Count > 0)
-                parameters["query"] = String.Join(" AND ", Parameters.Select(item => item.Property + item.Operator + item.Value));
+                parameters["query"] = String.Join(" AND ", Parameters.Select(item => item.Property + item.Operator.GetSingleAttribute<DescriptionAttribute>().Description + item.Value));
 
             if (!String.IsNullOrEmpty(OrderBy))
                 parameters["sort_by"] = OrderBy;
@@ -59,10 +67,12 @@ namespace VindiSharp.Client
 
             return vindiClient.Do<TEntity, TEntity>(ResourceName, attribute.SingleResultNodeName, VindiRequestMethod.Post, Entity);
         }
-        public void Update<TEntity>(String ResourceName, long Id, TEntity Entity)
+        public TEntity Update<TEntity>(String ResourceName, long Id, TEntity Entity)
             where TEntity : class, IVindiEntity, new()
         {
-            vindiClient.Do<TEntity>(String.Format("{0}/{1}", ResourceName, Id), VindiRequestMethod.Put, Entity);
+            VindiNodeAttribute attribute = GetVindiNodeAttribute<TEntity>();
+
+            return vindiClient.Do<TEntity, TEntity>(String.Format("{0}/{1}", ResourceName, Id), attribute.SingleResultNodeName, VindiRequestMethod.Put, Entity);
         }
         public void Delete<TEntity>(String ResourceName, long Id)
            where TEntity : class, IVindiEntity, new()

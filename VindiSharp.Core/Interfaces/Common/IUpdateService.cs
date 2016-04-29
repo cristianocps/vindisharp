@@ -7,6 +7,6 @@ namespace VindiSharp.Core.Interfaces
 {
     public interface IUpdateService<TEntity> where TEntity : class
     {
-        void Update(TEntity Entity);
+        TEntity Update(TEntity Entity);
     }
 }

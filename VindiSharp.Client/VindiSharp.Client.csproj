@@ -57,8 +57,12 @@
     <Compile Include="Client\IVindiGenericRepository.cs" />
     <Compile Include="Client\VindiGenericRepository.cs" />
     <Compile Include="Client\VindiHttpClient.cs" />
+    <Compile Include="Extensions\VindiNodeUtils.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\BillService.cs" />
     <Compile Include="Services\CustomerService.cs" />
+    <Compile Include="Services\PlanService.cs" />
+    <Compile Include="Services\SubscriptionService.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\VindiSharp.Core\VindiSharp.Core.csproj">
@@ -71,6 +75,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Context\" />
+    <Folder Include="Entities\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
