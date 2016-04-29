@@ -23,9 +23,9 @@ namespace VindiSharp.Client.Services
             return genericRepository.Insert(Entity.ResourceName, Entity);
         }
 
-        public void Delete(long Id)
+        public Customer Delete(long Id)
         {
-            genericRepository.Delete<Customer>(Customer.RESOURCE_NAME, Id);
+            return genericRepository.Delete<Customer>(Customer.RESOURCE_NAME, Id);
         }
 
         public List<Customer> GetAll(int Page = 1, int PerPage = 10, List<QueryParameter> query = null, string OrderBy = null, SortOrder? OrderByDirection = SortOrder.Asc)

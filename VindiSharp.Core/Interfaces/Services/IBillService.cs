@@ -13,7 +13,7 @@ namespace VindiSharp.Core.Interfaces
         ISearchService<Bill>
 
     {
-        void Approve(long Id);
-        void Charge(long Id);
+        Bill Approve(long Id);
+        Bill Charge(long Id);
     }
 }

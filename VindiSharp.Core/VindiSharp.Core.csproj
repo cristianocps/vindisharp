@@ -65,6 +65,7 @@
     <Compile Include="Core\VindiNodeAttribute.cs" />
     <Compile Include="Entities\Bill\Bill.cs" />
     <Compile Include="Entities\Bill\BillItem.cs" />
+    <Compile Include="Enums\BillStatus.cs" />
     <Compile Include="Entities\Bill\BillSummary.cs" />
     <Compile Include="Entities\Bill\PaymentProfile.cs" />
     <Compile Include="Entities\Charge\Charge.cs" />

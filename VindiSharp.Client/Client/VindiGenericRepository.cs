@@ -74,10 +74,12 @@ namespace VindiSharp.Client
 
             return vindiClient.Do<TEntity, TEntity>(String.Format("{0}/{1}", ResourceName, Id), attribute.SingleResultNodeName, VindiRequestMethod.Put, Entity);
         }
-        public void Delete<TEntity>(String ResourceName, long Id)
+        public TEntity Delete<TEntity>(String ResourceName, long Id)
            where TEntity : class, IVindiEntity, new()
         {
-            vindiClient.Do<TEntity>(String.Format("{0}/{1}", ResourceName, Id), VindiRequestMethod.Delete);
+            VindiNodeAttribute attribute = GetVindiNodeAttribute<TEntity>();
+
+            return vindiClient.Do<TEntity>(String.Format("{0}/{1}", ResourceName, Id), attribute.SingleResultNodeName, VindiRequestMethod.Delete);
         }
     }
 }

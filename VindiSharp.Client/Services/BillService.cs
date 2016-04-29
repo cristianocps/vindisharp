@@ -19,39 +19,39 @@ namespace VindiSharp.Client.Services
             genericRepository = repository;
         }
 
-        public void Approve(long Id)
+        public Bill Approve(long Id)
         {
-            
+            return genericRepository.Client.Do<Bill>(String.Format("{0}/{1}/approve", Bill.RESOURCE_NAME, Id), VindiNodeUtils.GetVindiNodeAttribute<Bill>().SingleResultNodeName, VindiRequestMethod.Post);
         }
 
-        public void Charge(long Id)
+        public Bill Charge(long Id)
         {
-            throw new NotImplementedException();
+            return genericRepository.Client.Do<Bill>(String.Format("{0}/{1}/charge", Bill.RESOURCE_NAME, Id), VindiNodeUtils.GetVindiNodeAttribute<Bill>().SingleResultNodeName, VindiRequestMethod.Post);
         }
 
         public Bill Create(Bill Entity)
         {
-            throw new NotImplementedException();
+            return genericRepository.Insert(Bill.RESOURCE_NAME, Entity);
         }
 
-        public void Delete(long Id)
+        public Bill Delete(long Id)
         {
-            throw new NotImplementedException();
+            return genericRepository.Delete<Bill>(Bill.RESOURCE_NAME, Id);
         }
 
         public List<Bill> GetAll(int Page = 1, int PerPage = 10, List<QueryParameter> query = null, string OrderBy = null, SortOrder? OrderByDirection = SortOrder.Asc)
         {
-            throw new NotImplementedException();
+            return genericRepository.GetAll<Bill>(Bill.RESOURCE_NAME, Page, PerPage, query, OrderBy, OrderByDirection);
         }
 
         public Bill GetById(long Id)
         {
-            throw new NotImplementedException();
+            return genericRepository.GetById<Bill>(Bill.RESOURCE_NAME, Id);
         }
 
         public Bill Update(Bill Entity)
         {
-            throw new NotImplementedException();
+            return genericRepository.Update<Bill>(Bill.RESOURCE_NAME, Entity.Id, Entity);
         }
     }
 }

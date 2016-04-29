@@ -16,7 +16,7 @@ namespace VindiSharp.Core.Entities
         public string Code { get; set; }
 
         [JsonProperty("plan")]
-        public Plan Plan { get; set; }
+        public PlanSummary Plan { get; set; }
 
         [JsonProperty("customer")]
         public CustomerSummary Customer

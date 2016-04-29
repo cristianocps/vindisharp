@@ -7,5 +7,11 @@ namespace VindiSharp.Core.Enums
 {
     public enum TransactionType
     {
+        Charge,
+        Refund,
+        Authorize,
+        Capture,
+        Verify,
+        Register
     }
 }

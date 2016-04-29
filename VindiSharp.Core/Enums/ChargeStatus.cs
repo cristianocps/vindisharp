@@ -7,5 +7,11 @@ namespace VindiSharp.Core.Enums
 {
     public enum ChargeStatus
     {
+        Pending,
+        Paid,
+        Canceled,
+        Processing,
+        Fraud,
+        Fraud_Review
     }
 }

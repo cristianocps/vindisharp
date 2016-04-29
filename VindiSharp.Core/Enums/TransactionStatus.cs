@@ -7,5 +7,12 @@ namespace VindiSharp.Core.Enums
 {
     public enum TransactionStatus
     {
+        Processing,
+        Success,
+        Rejected,
+        Failure,
+        Timeout,
+        Waiting,
+        Canceled
     }
 }

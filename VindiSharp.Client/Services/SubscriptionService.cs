@@ -23,9 +23,9 @@ namespace VindiSharp.Client.Services
             return genericRepository.Insert<Subscription>(Subscription.RESOURCE_NAME, Entity);
         }
 
-        public void Delete(long Id)
+        public Subscription Delete(long Id)
         {
-            genericRepository.Delete<Subscription>(Subscription.RESOURCE_NAME, Id);
+            return genericRepository.Delete<Subscription>(Subscription.RESOURCE_NAME, Id);
         }
 
         public List<Subscription> GetAll(int Page = 1, int PerPage = 10, List<QueryParameter> query = null, string OrderBy = null, SortOrder? OrderByDirection = SortOrder.Asc)

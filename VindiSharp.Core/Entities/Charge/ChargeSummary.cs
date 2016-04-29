@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,6 +18,7 @@ namespace VindiSharp.Core.Entities
         public decimal Amount { get; set; }
 
         [JsonProperty("status")]
+        [JsonConverter(typeof(StringEnumConverter), new object[] { true })]
         public ChargeStatus Status { get; set; }
 
         [JsonProperty("due_at")]
@@ -26,13 +28,13 @@ namespace VindiSharp.Core.Entities
         public DateTimeOffset? PaidAt { get; set; }
 
         [JsonProperty("installments")]
-        public int Installments { get; set; }
+        public int? Installments { get; set; }
 
         [JsonProperty("attempt_count")]
-        public int AttemptCount { get; set; }
+        public int? AttemptCount { get; set; }
 
         [JsonProperty("next_attempt")]
-        public int NextAttempt { get; set; }
+        public int? NextAttempt { get; set; }
 
         [JsonProperty("print_url")]
         public string PrintUrl { get; set; }

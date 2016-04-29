@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,6 +9,7 @@ using VindiSharp.Core.Interfaces;
 namespace VindiSharp.Core.Entities
 {
 
+    [VindiNode(SingleResultNodeName = "bill", MultiResultsNodeName = "bills")]
     public class Bill : IVindiEntity
     {
 
@@ -18,22 +20,23 @@ namespace VindiSharp.Core.Entities
         public string Code { get; set; }
 
         [JsonProperty("amount")]
-        public int Amount { get; set; }
+        public decimal Amount { get; set; }
 
         [JsonProperty("installments")]
         public int Installments { get; set; }
 
         [JsonProperty("status")]
-        public string Status { get; set; }
+        [JsonConverter(typeof(StringEnumConverter), new object[] { true })]
+        public BillStatus Status { get; set; }
 
         [JsonProperty("seen_at")]
-        public DateTimeOffset SeenAt { get; set; }
+        public DateTimeOffset? SeenAt { get; set; }
 
         [JsonProperty("billing_at")]
-        public DateTimeOffset BillingAt { get; set; }
+        public DateTimeOffset? BillingAt { get; set; }
 
         [JsonProperty("due_at")]
-        public DateTimeOffset DueAt { get; set; }
+        public DateTimeOffset? DueAt { get; set; }
 
         [JsonProperty("url")]
         public string Url { get; set; }
@@ -42,7 +45,7 @@ namespace VindiSharp.Core.Entities
         public DateTimeOffset CreatedAt { get; set; }
 
         [JsonProperty("updated_at")]
-        public DateTimeOffset UpdatedAt { get; set; }
+        public DateTimeOffset? UpdatedAt { get; set; }
 
         [JsonProperty("bill_items")]
         public List<BillItem> BillItems { get; set; }
@@ -59,8 +62,8 @@ namespace VindiSharp.Core.Entities
         [JsonProperty("subscription")]
         public SubscriptionSummary Subscription { get; set; }
 
-        [JsonProperty("metadata")]
-        public Dictionary<string, string> Metadata { get; set; }
+        //[JsonProperty("metadata")]
+        //public Dictionary<string, string> Metadata { get; set; }
 
         public const String RESOURCE_NAME = "bills";
 

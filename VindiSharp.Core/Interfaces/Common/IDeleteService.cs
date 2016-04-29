@@ -7,6 +7,6 @@ namespace VindiSharp.Core.Interfaces
 {
     public interface IDeleteService<TEntity> where TEntity : class
     {
-        void Delete(long Id);
+        TEntity Delete(long Id);
     }
 }

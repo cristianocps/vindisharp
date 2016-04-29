@@ -19,7 +19,7 @@ namespace VindiSharp.Core.Entities
         public int Quantity { get; set; }
 
         [JsonProperty("pricing_range_id")]
-        public int PricingRangeId { get; set; }
+        public int? PricingRangeId { get; set; }
 
         [JsonProperty("description")]
         public string Description { get; set; }
