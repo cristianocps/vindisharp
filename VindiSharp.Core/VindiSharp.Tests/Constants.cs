@@ -11,7 +11,7 @@ namespace VindiSharp.Tests
     public static class Constants
     {
         public static string API_URL = "https://app.vindi.com.br/api/";
-        public static string API_KEY = "RO7GCigchzNXcPJlIz4De_lO70lBmWV8";
+        public static string API_KEY = "YOUR_API_KEY";
         public static string API_VERSION = "v1";
 
         public static IVindiHttpClient CreateClient()

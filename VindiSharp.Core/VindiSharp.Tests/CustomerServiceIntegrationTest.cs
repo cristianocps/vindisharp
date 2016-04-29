@@ -21,8 +21,8 @@ namespace VindiSharp.Tests
         {
 
 
-            IVindiHttpClient client = new VindiHttpClient(new Uri("https://app.vindi.com.br/api/"), "RO7GCigchzNXcPJlIz4De_lO70lBmWV8", "v1");
-            IVindiGenericRepository repository = new VindiGenericRepository(client);
+
+            IVindiGenericRepository repository = new VindiGenericRepository(Constants.CreateClient());
 
             customerService = new CustomerService(repository);
         }
@@ -39,7 +39,7 @@ namespace VindiSharp.Tests
         {
             Customer newCustomer = customerService.GetById(604792);
 
-            
+
             newCustomer.Phones.Add(new CustomerPhone { Number = "5519996589496", PhoneType = Core.Enums.PhoneType.Mobile });
 
             Customer updatedCustomer = customerService.Update(newCustomer);
