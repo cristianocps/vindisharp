@@ -1,2 +1,2 @@
-# vindisharp
-Client for the https://www.vindi.com.br/ api write in CSharp.
+# VindiSharp
+Client for the Vindi subscription management api (https://www.vindi.com.br/) written in CSharp.
