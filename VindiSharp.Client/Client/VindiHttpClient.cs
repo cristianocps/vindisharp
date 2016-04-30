@@ -10,12 +10,12 @@ using System.Text;
 #if !NET35
 using System.Threading;
 using System.Threading.Tasks;
-using RestSharp.Newtonsoft.Json;
 #endif
 using VindiSharp.Core.Enums;
 using VindiSharp.Core.Exceptions;
 using VindiSharp.Core.Interfaces;
 using RestRequest = RestSharp.RestRequest;
+using NewtonsoftJsonSerializer = RestSharp.Serializers.JsonSerializer;
 namespace VindiSharp.Client
 {
     public class VindiHttpClient : IVindiHttpClient
@@ -90,9 +90,9 @@ namespace VindiSharp.Client
 
         private static void SetSerializer(IRestRequest request)
         {
-#if !NET35
-            request.JsonSerializer = new NewtonsoftJsonSerializer(new JsonSerializer { NullValueHandling = NullValueHandling.Ignore });
-#endif
+
+            request.JsonSerializer = new NewtonsoftJsonSerializer();
+
         }
 
         private static void AddParameters(Dictionary<string, object> Parameters, IRestRequest request)
