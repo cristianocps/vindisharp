@@ -2,8 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using VindiSharp.Core.Enums;
 
+using VindiSharp.Core.Enums;
+#if !NET35
+using System.Threading.Tasks;
+#endif
 namespace VindiSharp.Core.Interfaces
 {
     public interface IVindiHttpClient
