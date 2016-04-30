@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using VindiSharp.Core;
 using VindiSharp.Core.Enums;
 using VindiSharp.Core.Interfaces;
@@ -35,7 +34,7 @@ namespace VindiSharp.Client
             parameters["per_page"] = PerPage;
 
             if (Parameters != null && Parameters.Count > 0)
-                parameters["query"] = String.Join(" AND ", Parameters.Select(item => item.Property + item.Operator.GetSingleAttribute<DescriptionAttribute>().Description + item.Value));
+                parameters["query"] = String.Join(" AND ", Parameters.Select(item => item.Property + item.Operator.GetSingleAttribute<DescriptionAttribute>().Description + item.Value).ToArray());
 
             if (!String.IsNullOrEmpty(OrderBy))
                 parameters["sort_by"] = OrderBy;
@@ -58,7 +57,7 @@ namespace VindiSharp.Client
         {
             VindiNodeAttribute attribute = GetVindiNodeAttribute<TEntity>();
 
-            return vindiClient.Do<TEntity>(String.Format("{0}/{1}", ResourceName, Id), attribute.SingleResultNodeName, VindiRequestMethod.Get);
+            return vindiClient.Do<TEntity>(String.Format("{0}/{1}", ResourceName, Id), attribute.SingleResultNodeName, VindiRequestMethod.Get, new Dictionary<string, object> { });
         }
         public TEntity Insert<TEntity>(String ResourceName, TEntity Entity)
             where TEntity : class, IVindiEntity, new()
@@ -79,7 +78,7 @@ namespace VindiSharp.Client
         {
             VindiNodeAttribute attribute = GetVindiNodeAttribute<TEntity>();
 
-            return vindiClient.Do<TEntity>(String.Format("{0}/{1}", ResourceName, Id), attribute.SingleResultNodeName, VindiRequestMethod.Delete);
+            return vindiClient.Do<TEntity>(String.Format("{0}/{1}", ResourceName, Id), attribute.SingleResultNodeName, VindiRequestMethod.Delete, new Dictionary<string, object> { });
         }
     }
 }

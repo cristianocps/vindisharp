@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using VindiSharp.Core;
 using VindiSharp.Core.Entities;
 using VindiSharp.Core.Enums;
@@ -28,10 +27,19 @@ namespace VindiSharp.Client.Services
             return genericRepository.Delete<Customer>(Customer.RESOURCE_NAME, Id);
         }
 
+#if !NET35
         public List<Customer> GetAll(int Page = 1, int PerPage = 10, List<QueryParameter> query = null, string OrderBy = null, SortOrder? OrderByDirection = SortOrder.Asc)
         {
             return genericRepository.GetAll<Customer>(Customer.RESOURCE_NAME, Page, PerPage, query, OrderBy, OrderByDirection);
+        } 
+#endif
+
+#if NET35
+        public List<Customer> GetAll(int Page, int PerPage, List<QueryParameter> query, string OrderBy, SortOrder OrderByDirection)
+        {
+            return genericRepository.GetAll<Customer>(Customer.RESOURCE_NAME, Page, PerPage, query, OrderBy, OrderByDirection);
         }
+#endif
 
         public Customer GetById(long Id)
         {

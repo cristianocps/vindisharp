@@ -28,7 +28,7 @@ namespace VindiSharp.Tests
         public void TestGetBills()
         {
 
-            List<Bill> bills = billService.GetAll();
+            List<Bill> bills = billService.GetAll(1, 10, new List<Core.QueryParameter>(), "", Core.Enums.SortOrder.Asc);
 
             Assert.True(bills != null && bills.Count > 0);
         }

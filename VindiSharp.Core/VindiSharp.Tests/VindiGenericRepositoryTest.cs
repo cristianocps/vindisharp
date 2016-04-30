@@ -31,7 +31,7 @@ namespace VindiSharp.Tests
         public void TestDo()
         {
 
-            genericRepository.GetAll<Customer>(Customer.RESOURCE_NAME);
+            genericRepository.GetAll<Customer>(Customer.RESOURCE_NAME, 1, 10, new List<QueryParameter> { }, "", Core.Enums.SortOrder.Asc);
 
             A.CallTo(() => vindiClient.Do<List<Customer>>(Customer.RESOURCE_NAME, "customers", Core.Enums.VindiRequestMethod.Get, null))
                 .WithAnyArguments()

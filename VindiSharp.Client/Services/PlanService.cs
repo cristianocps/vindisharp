@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
+#if !NET35
+using System.Threading.Tasks; 
+#endif
 using VindiSharp.Core;
 using VindiSharp.Core.Entities;
 using VindiSharp.Core.Enums;
@@ -24,14 +26,22 @@ namespace VindiSharp.Client.Services
             return genericRepository.Insert<Plan>(Plan.RESOURCE_NAME, Entity);
         }
 
+#if !NET35
         public List<Plan> GetAll(int Page = 1, int PerPage = 10, List<QueryParameter> query = null, string OrderBy = null, SortOrder? OrderByDirection = SortOrder.Asc)
         {
             return genericRepository.GetAll<Plan>(Plan.RESOURCE_NAME, Page, PerPage, query, OrderBy, OrderByDirection);
+        } 
+#endif
+#if NET35
+        public List<Plan> GetAll(int Page, int PerPage, List<QueryParameter> query, string OrderBy, SortOrder OrderByDirection)
+        {
+            return genericRepository.GetAll<Plan>(Plan.RESOURCE_NAME, Page, PerPage, query, OrderBy, OrderByDirection);
         }
+#endif
 
         public Plan GetByCode(string code)
         {
-            List<Plan> plans = GetAll(1, 10, new List<QueryParameter> { new QueryParameter("code", QueryOperator.Equals, code) });
+            List<Plan> plans = GetAll(1, 10, new List<QueryParameter> { new QueryParameter("code", QueryOperator.Equals, code) }, "", SortOrder.Asc);
 
             return plans.SingleOrDefault();
         }

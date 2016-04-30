@@ -2,13 +2,16 @@
 using Newtonsoft.Json.Linq;
 using RestSharp;
 using RestSharp.Authenticators;
-using RestSharp.Newtonsoft.Json;
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+#if !NET35
 using System.Threading;
 using System.Threading.Tasks;
+using RestSharp.Newtonsoft.Json;
+#endif
 using VindiSharp.Core.Enums;
 using VindiSharp.Core.Exceptions;
 using VindiSharp.Core.Interfaces;
@@ -83,26 +86,13 @@ namespace VindiSharp.Client
 
             return restMethod;
         }
-        public TResponse Do<TResponse>(string Resource, string NodeName, VindiRequestMethod RequestMethod = VindiRequestMethod.Get, Dictionary<string, object> Parameters = null)
-            where TResponse : class, new()
-        {
-            RestRequest request = new RestRequest(Resource, GetMethod(RequestMethod));
-            request.RequestFormat = DataFormat.Json;
-            request.RootElement = NodeName;
-            SetSerializer(request);
 
-            AddParameters(Parameters, request);
-
-            IRestResponse<TResponse> response = restClient.Execute<TResponse>(request);
-
-            HandleResponse(response, request);
-
-            return response.Data;
-        }
 
         private static void SetSerializer(IRestRequest request)
         {
+#if !NET35
             request.JsonSerializer = new NewtonsoftJsonSerializer(new JsonSerializer { NullValueHandling = NullValueHandling.Ignore });
+#endif
         }
 
         private static void AddParameters(Dictionary<string, object> Parameters, IRestRequest request)
@@ -117,6 +107,23 @@ namespace VindiSharp.Client
         }
 
 
+#if NET35
+        public TResponse Do<TResponse>(string Resource, string NodeName, VindiRequestMethod RequestMethod, Dictionary<string, object> Parameters)
+      where TResponse : class, new()
+        {
+            RestRequest request = new RestRequest(Resource, GetMethod(RequestMethod));
+            request.RequestFormat = DataFormat.Json;
+            request.RootElement = NodeName;
+            SetSerializer(request);
+
+            AddParameters(Parameters, request);
+
+            IRestResponse<TResponse> response = restClient.Execute<TResponse>(request);
+
+            HandleResponse(response, request);
+
+            return response.Data;
+        }
         public TResponse Do<TEntity, TResponse>(string Resource, string NodeName, VindiRequestMethod RequestMethod, TEntity Parameters)
             where TResponse : class, new()
             where TEntity : class, IVindiEntity, new()
@@ -149,9 +156,58 @@ namespace VindiSharp.Client
             HandleResponse(response, request);
 
         }
-
-        public async Task<TResponse> DoAsync<TResponse>(string Resource, string NodeName, VindiRequestMethod RequestMethod = VindiRequestMethod.Get, Dictionary<string, object> Parameters = null)
+#endif
+#if !NET35
+        public TResponse Do<TResponse>(string Resource, string NodeName, VindiRequestMethod RequestMethod = VindiRequestMethod.Get, Dictionary<string, object> Parameters = null)
         where TResponse : class, new()
+        {
+            RestRequest request = new RestRequest(Resource, GetMethod(RequestMethod));
+            request.RequestFormat = DataFormat.Json;
+            request.RootElement = NodeName;
+            SetSerializer(request);
+
+            AddParameters(Parameters, request);
+
+            IRestResponse<TResponse> response = restClient.Execute<TResponse>(request);
+
+            HandleResponse(response, request);
+
+            return response.Data;
+        }
+        public TResponse Do<TEntity, TResponse>(string Resource, string NodeName, VindiRequestMethod RequestMethod, TEntity Parameters)
+            where TResponse : class, new()
+            where TEntity : class, IVindiEntity, new()
+        {
+            RestRequest request = new RestRequest(Resource, GetMethod(RequestMethod));
+            SetSerializer(request);
+
+            request.RequestFormat = DataFormat.Json;
+            request.RootElement = NodeName;
+
+            request.AddJsonBody(Parameters);
+
+            IRestResponse<TResponse> response = restClient.Execute<TResponse>(request);
+
+            HandleResponse(response, request);
+
+            return response.Data;
+        }
+        public void Do<TEntity>(string Resource, VindiRequestMethod RequestMethod, TEntity Parameters)
+           where TEntity : class, IVindiEntity, new()
+        {
+            RestRequest request = new RestRequest(Resource, GetMethod(RequestMethod));
+            SetSerializer(request);
+            request.RequestFormat = DataFormat.Json;
+
+            request.AddJsonBody(Parameters);
+
+            IRestResponse response = restClient.Execute(request);
+
+            HandleResponse(response, request);
+
+        }
+        public async Task<TResponse> DoAsync<TResponse>(string Resource, string NodeName, VindiRequestMethod RequestMethod = VindiRequestMethod.Get, Dictionary<string, object> Parameters = null)
+     where TResponse : class, new()
         {
             IRestRequest request = new RestRequest(Resource, GetMethod(RequestMethod));
             SetSerializer(request);
@@ -210,6 +266,7 @@ namespace VindiSharp.Client
 
             return response.Data;
         }
+#endif
         private void HandleResponse(IRestResponse response, IRestRequest request)
         {
             Int32 httpStatusCode = (int)response.StatusCode;

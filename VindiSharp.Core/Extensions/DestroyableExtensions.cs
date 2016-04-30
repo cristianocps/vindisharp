@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Text;
-using System.Threading.Tasks;
 using VindiSharp.Core.Interfaces;
 
 namespace VindiSharp.Core.Extensions
@@ -33,8 +32,9 @@ namespace VindiSharp.Core.Extensions
 
             foreach (PropertyInfo prop in properties)
             {
-                prop.SetValue(item, null);
+                prop.SetValue(item, null, new object[] { });
             }
+
         }
 
 

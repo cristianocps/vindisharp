@@ -34,7 +34,7 @@ namespace VindiSharp.Tests
         [Test]
         public void TestGetSubscriptions()
         {
-            List<Subscription> subscriptions = subscriptionService.GetAll();
+            List<Subscription> subscriptions = subscriptionService.GetAll(1, 10, new List<Core.QueryParameter>(), "", Core.Enums.SortOrder.Asc);
 
             Assert.IsTrue(subscriptions != null && subscriptions.Count > 0);
         }
@@ -65,7 +65,7 @@ namespace VindiSharp.Tests
 
             Customer customer = customerService.Create(new Customer { Name = nameGenerator.GenerateRandomMaleFirstAndLastName(), Email = nameGenerator.GenerateRandomFirstName() + "@1sight.com.br" });
 
-            Plan plan = planService.GetAll(1, 10, new List<Core.QueryParameter> { new Core.QueryParameter("code", Core.QueryOperator.Equals, "plano-bronze-1mes") }).FirstOrDefault();
+            Plan plan = planService.GetAll(1, 10, new List<Core.QueryParameter> { new Core.QueryParameter("code", Core.QueryOperator.Equals, "plano-bronze-1mes") }, "", Core.Enums.SortOrder.Asc).FirstOrDefault();
 
             SubscriptionResponse subscription = subscriptionService.Create(new SubscriptionRequest
             {

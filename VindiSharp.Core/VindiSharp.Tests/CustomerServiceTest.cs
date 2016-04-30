@@ -29,7 +29,7 @@ namespace VindiSharp.Tests
         [Test]
         public void TestGetAll()
         {
-            customerService.GetAll();
+            customerService.GetAll(1, 10, new List<Core.QueryParameter>(), "", Core.Enums.SortOrder.Asc);
 
             A.CallTo(() => genericRepository.GetAll<Customer>(Customer.RESOURCE_NAME, 1, 10, null, null, null)).MustHaveHappened();
 

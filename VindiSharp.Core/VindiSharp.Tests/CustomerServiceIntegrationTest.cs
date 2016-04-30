@@ -30,7 +30,7 @@ namespace VindiSharp.Tests
         [Test]
         public void TestGetCustomers()
         {
-            List<Customer> customers = customerService.GetAll(query: new List<Core.QueryParameter> { new Core.QueryParameter("status", Core.QueryOperator.Equals, "active") });
+            List<Customer> customers = customerService.GetAll(1, 10, new List<Core.QueryParameter> { new Core.QueryParameter("status", Core.QueryOperator.Equals, "active") }, "", Core.Enums.SortOrder.Asc);
 
             Assert.True(customers != null && customers.Count > 0);
         }

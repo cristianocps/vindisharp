@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using VindiSharp.Core;
 using VindiSharp.Core.Entities;
 using VindiSharp.Core.Enums;
@@ -21,12 +20,12 @@ namespace VindiSharp.Client.Services
 
         public Bill Approve(long Id)
         {
-            return genericRepository.Client.Do<Bill>(String.Format("{0}/{1}/approve", Bill.RESOURCE_NAME, Id), VindiNodeUtils.GetVindiNodeAttribute<Bill>().SingleResultNodeName, VindiRequestMethod.Post);
+            return genericRepository.Client.Do<Bill>(String.Format("{0}/{1}/approve", Bill.RESOURCE_NAME, Id), VindiNodeUtils.GetVindiNodeAttribute<Bill>().SingleResultNodeName, VindiRequestMethod.Post, null);
         }
 
         public Bill Charge(long Id)
         {
-            return genericRepository.Client.Do<Bill>(String.Format("{0}/{1}/charge", Bill.RESOURCE_NAME, Id), VindiNodeUtils.GetVindiNodeAttribute<Bill>().SingleResultNodeName, VindiRequestMethod.Post);
+            return genericRepository.Client.Do<Bill>(String.Format("{0}/{1}/charge", Bill.RESOURCE_NAME, Id), VindiNodeUtils.GetVindiNodeAttribute<Bill>().SingleResultNodeName, VindiRequestMethod.Post, null);
         }
 
         public Bill Create(Bill Entity)
@@ -39,10 +38,19 @@ namespace VindiSharp.Client.Services
             return genericRepository.Delete<Bill>(Bill.RESOURCE_NAME, Id);
         }
 
+#if !NET35
         public List<Bill> GetAll(int Page = 1, int PerPage = 10, List<QueryParameter> query = null, string OrderBy = null, SortOrder? OrderByDirection = SortOrder.Asc)
         {
             return genericRepository.GetAll<Bill>(Bill.RESOURCE_NAME, Page, PerPage, query, OrderBy, OrderByDirection);
+        } 
+#endif
+
+#if NET35
+        public List<Bill> GetAll(int Page, int PerPage, List<QueryParameter> query, string OrderBy, SortOrder OrderByDirection)
+        {
+            return genericRepository.GetAll<Bill>(Bill.RESOURCE_NAME, Page, PerPage, query, OrderBy, OrderByDirection);
         }
+#endif
 
         public Bill GetById(long Id)
         {

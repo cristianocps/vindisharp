@@ -28,7 +28,7 @@ namespace VindiSharp.Tests
         [Test]
         public void TestGetPlans()
         {
-            List<Plan> plans = planService.GetAll();
+            List<Plan> plans = planService.GetAll(1, 10, new List<Core.QueryParameter>(), "", Core.Enums.SortOrder.Asc);
 
             Assert.IsTrue(plans != null && plans.Count > 0);
         }
