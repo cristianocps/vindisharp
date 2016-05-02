@@ -292,7 +292,7 @@ namespace VindiSharp.Client
                     JObject jsonObject = JObject.Parse(response.Content);
                     List<VindiError> errors = jsonObject.SelectToken("errors", false).ToObject<List<VindiError>>();
 
-                    throw new VindiInvalidParametersException(errors, "A requisição foi enviada com um ou mais parâmetros inválidos, verifique a propriedade Errors para mais detalhes");
+                    throw new VindiInvalidParametersException(errors, "A requisição foi enviada com um ou mais parâmetros inválidos, verifique a propriedade Errors para mais detalhes" + String.Join(",", errors.Select(item => item.Id + item.Message).ToArray()));
 
                 }
             }

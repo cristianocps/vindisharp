@@ -19,7 +19,7 @@ namespace VindiSharp.Core.Entities
         }
 
         [JsonProperty("phone_type", NullValueHandling = NullValueHandling.Ignore)]
-        [JsonConverter(typeof(StringEnumConverter))]
+        [JsonConverter(typeof(StringEnumConverter), new object[] { true })]
         public PhoneType? PhoneType
         {
             get;

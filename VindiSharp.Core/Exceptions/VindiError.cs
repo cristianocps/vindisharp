@@ -6,6 +6,7 @@ using System.Text;
 
 namespace VindiSharp.Core.Exceptions
 {
+    [Serializable]
     public class VindiError
     {
         [JsonProperty("id")]

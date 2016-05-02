@@ -10,9 +10,8 @@ namespace VindiSharp.Core.Exceptions
 
         public List<VindiError> Errors { get; set; }
 
-        public VindiInvalidParametersException(List<VindiError> errors, String message) : base(message)
+        public VindiInvalidParametersException(List<VindiError> errors, String Message) : base(Message)
         {
-
             this.Errors = errors;
         }
 

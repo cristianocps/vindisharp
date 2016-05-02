@@ -29,7 +29,7 @@ namespace VindiSharp.Core.Entities
 
         [JsonProperty("billing_trigger_type")]
         [JsonConverter(typeof(StringEnumConverter))]
-        public BillingTriggerType BillingTriggerType { get; set; }
+        public BillingTriggerType? BillingTriggerType { get; set; }
 
         [JsonProperty("billing_trigger_day")]
         public int BillingTriggerDay { get; set; }

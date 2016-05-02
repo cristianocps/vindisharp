@@ -80,6 +80,5 @@ namespace VindiSharp.Tests
 
             Assert.IsNotNull(subscription);
         }
-
     }
 }

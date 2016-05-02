@@ -95,6 +95,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Serializer\JsonSerializer.cs" />
     <Compile Include="Services\BillService.cs" />
+    <Compile Include="Services\ProductService.cs" />
     <Compile Include="Services\CustomerService.cs" />
     <Compile Include="Services\PlanService.cs" />
     <Compile Include="Services\SubscriptionService.cs" />

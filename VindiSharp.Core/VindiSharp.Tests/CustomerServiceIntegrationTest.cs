@@ -37,12 +37,12 @@ namespace VindiSharp.Tests
         [Test]
         public void TestCreateCustomer()
         {
-            Customer newCustomer = customerService.GetById(604792);
+            Customer newCustomer = new Customer { Name = "José João do Lorem Ipsum", Email = "jose.joao.lorem@1sight.com.br" };
 
-
+            newCustomer.Phones = new List<CustomerPhone>();
             newCustomer.Phones.Add(new CustomerPhone { Number = "5519996589496", PhoneType = Core.Enums.PhoneType.Mobile });
 
-            Customer updatedCustomer = customerService.Update(newCustomer);
+            Customer updatedCustomer = customerService.Create(newCustomer);
         }
     }
 }
