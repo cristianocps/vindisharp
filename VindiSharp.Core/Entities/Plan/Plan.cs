@@ -61,9 +61,6 @@ namespace VindiSharp.Core.Entities
         [JsonProperty("plan_items")]
         public List<PlanItem> PlanItems { get; set; }
 
-        [JsonProperty("metadata")]
-        public Dictionary<string, string> Metadata { get; set; }
-
         public const string RESOURCE_NAME = "plans";
         public string ResourceName
         {

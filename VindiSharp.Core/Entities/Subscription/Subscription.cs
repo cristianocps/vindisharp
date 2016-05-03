@@ -75,9 +75,6 @@ namespace VindiSharp.Core.Entities
         [JsonProperty("current_period")]
         public Period CurrentPeriod { get; set; }
 
-        [JsonProperty("metadata")]
-        public Dictionary<string, string> Metadata { get; set; }
-
         public const string RESOURCE_NAME = "subscriptions";
         public string ResourceName
         {

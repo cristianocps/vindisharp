@@ -16,7 +16,7 @@ namespace VindiSharp.Core.Entities
         public string Status { get; set; }
 
         [JsonProperty("cycles")]
-        public int Cycles { get; set; }
+        public int? Cycles { get; set; }
 
         [JsonProperty("quantity")]
         public int Quantity { get; set; }

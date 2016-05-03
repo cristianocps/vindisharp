@@ -97,6 +97,7 @@
     <Compile Include="Entities\Bill\Bill.cs" />
     <Compile Include="Entities\Bill\BillItem.cs" />
     <Compile Include="Entities\DataRequest.cs" />
+    <Compile Include="Entities\ServerRequest.cs" />
     <Compile Include="Entities\EventRequest.cs" />
     <Compile Include="Entities\Subscription\SubscriptionRequest.cs" />
     <Compile Include="Entities\Subscription\SubscriptionRequestProduct.cs" />

@@ -43,9 +43,6 @@ namespace VindiSharp.Core.Entities
         [JsonProperty("pricing_schema")]
         public PricingSchema PricingSchema { get; set; }
 
-        [JsonProperty("metadata")]
-        public Dictionary<string, string> Metadata { get; set; }
-
         public const string RESOURCE_NAME = "products";
         public string ResourceName
         {

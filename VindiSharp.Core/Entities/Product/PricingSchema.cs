@@ -31,7 +31,7 @@ namespace VindiSharp.Core.Entities
         }
 
         [JsonProperty("minimum_price")]
-        public decimal MinimumPrice
+        public decimal? MinimumPrice
         {
             get;
             set;

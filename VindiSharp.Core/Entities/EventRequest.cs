@@ -5,11 +5,11 @@ using System.Linq;
 using System.Text;
 
 namespace VindiSharp.Core.Entities
-{
+{    
     public class EventRequest
     {
         [JsonProperty("type", NullValueHandling = NullValueHandling.Ignore)]
-        public Int64 Type
+        public String Type
         {
             get;
             set;

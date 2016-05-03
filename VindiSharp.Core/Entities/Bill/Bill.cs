@@ -62,9 +62,6 @@ namespace VindiSharp.Core.Entities
         [JsonProperty("subscription")]
         public SubscriptionSummary Subscription { get; set; }
 
-        [JsonProperty("metadata")]
-        public Dictionary<string, string> Metadata { get; set; }
-
         public const String RESOURCE_NAME = "bills";
 
         public string ResourceName

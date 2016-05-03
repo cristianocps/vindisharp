@@ -37,9 +37,6 @@ namespace VindiSharp.Core.Entities
         [JsonProperty("billing_cycles")]
         public int BillingCycles { get; set; }
 
-        [JsonProperty("metadata")]
-        public Dictionary<string, string> Metadata { get; set; }
-
         [JsonProperty("product_items")]
         public List<SubscriptionRequestProductItem> ProductItems { get; set; }
 

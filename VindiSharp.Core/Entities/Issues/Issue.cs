@@ -15,11 +15,11 @@ namespace VindiSharp.Core.Entities
         public int Id { get; set; }
 
         [JsonProperty("issue_type")]
-        [JsonConverter(typeof(StringEnumConverter))]
+        [JsonConverter(typeof(StringEnumConverter), new object[] { true })]
         public IssueType IssueType { get; set; }
 
         [JsonProperty("status")]
-        [JsonConverter(typeof(StringEnumConverter))]
+        [JsonConverter(typeof(StringEnumConverter), new object[] { true })]
         public IssueStatus Status { get; set; }
 
         [JsonProperty("item_type")]
