@@ -37,7 +37,7 @@ namespace VindiSharp.Core.Entities
         public int AttemptCount { get; set; }
 
         [JsonProperty("next_attempt")]
-        public int NextAttempt { get; set; }
+        public int? NextAttempt { get; set; }
 
         [JsonProperty("print_url")]
         public string PrintUrl { get; set; }
