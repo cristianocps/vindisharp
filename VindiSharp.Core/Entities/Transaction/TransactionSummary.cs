@@ -41,7 +41,7 @@ namespace VindiSharp.Core.Entities
         public string GatewayTransactionId { get; set; }
 
         [JsonProperty("gateway_response_fields")]
-        public string GatewayResponseFields { get; set; }
+        public GatewayResponseFields GatewayResponseFields { get; set; }
 
         [JsonProperty("fraud_detector_score")]
         public int? FraudDetectorScore { get; set; }

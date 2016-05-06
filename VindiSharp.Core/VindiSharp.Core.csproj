@@ -102,6 +102,7 @@
     <Compile Include="Entities\Subscription\SubscriptionRequest.cs" />
     <Compile Include="Entities\Subscription\SubscriptionRequestProduct.cs" />
     <Compile Include="Entities\Subscription\SubscriptionResponse.cs" />
+    <Compile Include="Entities\Transaction\GatewayResponseFields.cs" />
     <Compile Include="Enums\BillStatus.cs" />
     <Compile Include="Entities\Bill\BillSummary.cs" />
     <Compile Include="Entities\Bill\PaymentProfile.cs" />
