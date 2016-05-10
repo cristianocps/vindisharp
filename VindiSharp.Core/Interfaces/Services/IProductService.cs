@@ -13,6 +13,6 @@ namespace VindiSharp.Core.Interfaces
         ISearchService<Product>
 
     {
-
+        Product GetByCode(String code);
     }
 }

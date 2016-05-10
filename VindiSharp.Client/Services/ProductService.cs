@@ -40,6 +40,12 @@ namespace VindiSharp.Client.Services
             return genericRepository.GetAll<Product>(Product.RESOURCE_NAME, Page, PerPage, query, OrderBy, OrderByDirection);
         }
 #endif
+        public Product GetByCode(string code)
+        {
+            List<Product> plans = GetAll(1, 10, new List<QueryParameter> { new QueryParameter("code", QueryOperator.Equals, code) }, "", SortOrder.Asc);
+
+            return plans.SingleOrDefault();
+        }
 
         public Product GetById(long Id)
         {

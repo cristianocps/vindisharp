@@ -97,6 +97,8 @@
     <Compile Include="Entities\Bill\Bill.cs" />
     <Compile Include="Entities\Bill\BillItem.cs" />
     <Compile Include="Entities\DataRequest.cs" />
+    <Compile Include="Entities\ProductItem\ProductItemsRequest.cs" />
+    <Compile Include="Entities\ProductItem\ProductItemsResponse.cs" />
     <Compile Include="Entities\ServerRequest.cs" />
     <Compile Include="Entities\EventRequest.cs" />
     <Compile Include="Entities\Subscription\SubscriptionRequest.cs" />
@@ -118,6 +120,7 @@
     <Compile Include="Entities\Discount\DiscountSummary.cs" />
     <Compile Include="Entities\Issues\Issue.cs" />
     <Compile Include="Entities\Plan\PlanItem.cs" />
+    <Compile Include="Enums\ProductItemStatus.cs" />
     <Compile Include="Enums\SubscriptionStatus.cs" />
     <Compile Include="Enums\PlanStatus.cs" />
     <Compile Include="Enums\ProductStatus.cs" />

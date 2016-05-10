@@ -92,6 +92,7 @@
     <Compile Include="Constants.cs" />
     <Compile Include="CustomerServiceTest.cs" />
     <Compile Include="CustomerServiceIntegrationTest.cs" />
+    <Compile Include="ProductServiceIntegrationTest.cs" />
     <Compile Include="SubscriptionServiceIntegrationTest.cs" />
     <Compile Include="PlanServiceIntegrationTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
