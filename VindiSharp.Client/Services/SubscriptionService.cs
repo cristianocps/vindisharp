@@ -22,6 +22,11 @@ namespace VindiSharp.Client.Services
             return genericRepository.Client.Do<SubscriptionRequest, SubscriptionResponse>(Subscription.RESOURCE_NAME, String.Empty, VindiRequestMethod.Post, Entity);
         }
 
+        public SubscriptionResponse Update(SubscriptionRequest Entity)
+        {
+            return genericRepository.Client.Do<SubscriptionRequest, SubscriptionResponse>(String.Format("{0}/{1}", Subscription.RESOURCE_NAME, Entity.Id), VindiNodeUtils.GetVindiNodeAttribute<ProductItemsRequest>().SingleResultNodeName, VindiRequestMethod.Put, Entity);
+        }
+
         public Subscription Delete(long Id)
         {
             return genericRepository.Delete<Subscription>(Subscription.RESOURCE_NAME, Id);

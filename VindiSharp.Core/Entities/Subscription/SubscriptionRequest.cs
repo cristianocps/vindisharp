@@ -11,6 +11,8 @@ namespace VindiSharp.Core.Entities
 {
     public class SubscriptionRequest : IVindiEntity
     {
+        [JsonProperty("id")]
+        public int Id { get; set; }
 
         [JsonProperty("start_at")]
         public DateTimeOffset? StartAt { get; set; }
@@ -32,7 +34,7 @@ namespace VindiSharp.Core.Entities
         public BillingTriggerType? BillingTriggerType { get; set; }
 
         [JsonProperty("billing_trigger_day")]
-        public int BillingTriggerDay { get; set; }
+        public int? BillingTriggerDay { get; set; }
 
         [JsonProperty("billing_cycles")]
         public int BillingCycles { get; set; }

@@ -14,5 +14,6 @@ namespace VindiSharp.Core.Interfaces
     {
         Subscription Reactivate(long Id);
         SubscriptionResponse Create(SubscriptionRequest newSubscription);
+        SubscriptionResponse Update(SubscriptionRequest currentSubscription);
     }
 }

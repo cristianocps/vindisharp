@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,7 +16,8 @@ namespace VindiSharp.Core.Entities
         public int Id { get; set; }
 
         [JsonProperty("status")]
-        public string Status { get; set; }
+        [JsonConverter(typeof(StringEnumConverter), new object[] { true })]
+        public ProductItemStatus Status { get; set; }
 
         [JsonProperty("cycles")]
         public int? Cycles { get; set; }
