@@ -37,7 +37,7 @@ namespace VindiSharp.Core.Entities
         public int? BillingTriggerDay { get; set; }
 
         [JsonProperty("billing_cycles")]
-        public int BillingCycles { get; set; }
+        public int? BillingCycles { get; set; }
 
         [JsonProperty("product_items")]
         public List<SubscriptionRequestProductItem> ProductItems { get; set; }
